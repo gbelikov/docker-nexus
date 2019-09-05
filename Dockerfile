@@ -22,7 +22,7 @@ ENV SONATYPE_WORK ${SONATYPE_DIR}/sonatype-work
 RUN apk add --no-cache --update bash ca-certificates runit su-exec util-linux openjdk8-jre
 
 # Install nexus
-RUN apk add --no-cache -t .build-deps wget gnupg openssl \
+RUN apk add --no-cache -t .build-deps curl wget gnupg openssl \
   && cd /tmp \
   && echo "===> Installing Nexus ${NEXUS_VERSION}..." \
   && wget -O nexus.tar.gz $NEXUS_TARBALL_URL; \
