@@ -10,7 +10,9 @@ A container image for Sonatype Nexus Repository Manager OSS, based on Alpine Lin
 * Nexus Repository Manager OSS 3.17.0 ([release notes](https://help.sonatype.com/repomanager3/release-notes/2019-release-notes#id-2019ReleaseNotes-RepositoryManager3.17.0))
 
 # Build, tag, push
+```
 docker login
 docker build --tag phansl/sonatype-nexus:3.17.2 --tag phansl/sonatype-nexus:latest .
 docker push phansl/sonatype-nexus:3.17.2 
 docker push phansl/sonatype-nexus:latest
+```
