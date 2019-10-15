@@ -6,7 +6,7 @@ LABEL maintainer devops@travelaudience.com
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm/jre
 
 # nexus
-ENV NEXUS_VERSION 3.17.0-01
+ENV NEXUS_VERSION 3.19.1-01
 ENV NEXUS_DOWNLOAD_URL "https://download.sonatype.com/nexus/3"
 ENV NEXUS_TARBALL_URL "${NEXUS_DOWNLOAD_URL}/nexus-${NEXUS_VERSION}-unix.tar.gz"
 ENV NEXUS_TARBALL_ASC_URL "${NEXUS_DOWNLOAD_URL}/nexus-${NEXUS_VERSION}-unix.tar.gz.asc"
@@ -22,7 +22,7 @@ ENV NEXUS_KEYCLOAK_PLUGIN_VERSION 0.3.4-SNAPSHOT
 ENV NEXUS_KEYCLOAK_PLUGIN_URL "https://github.com/flytreeleft/nexus3-keycloak-plugin/releases/download/0.3.4-pre2-SNAPSHOT/nexus3-keycloak-plugin-${NEXUS_KEYCLOAK_PLUGIN_VERSION}.jar"
 
 # Install prerequisites
-RUN apk add --no-cache --update bash ca-certificates runit su-exec util-linux openjdk8-jre curl ruby
+RUN apk add --no-cache --update bash ca-certificates runit su-exec util-linux openjdk8-jre curl
 
 # Install nexus
 RUN apk add --no-cache -t .build-deps wget gnupg openssl \
@@ -49,7 +49,6 @@ RUN cd /tmp \
   && wget https://github.com/flytreeleft/nexus3-keycloak-plugin/releases/download/0.3.4-pre2-SNAPSHOT/nexus3-keycloak-plugin-${NEXUS_KEYCLOAK_PLUGIN_VERSION}.jar \
   && mkdir -p ${NEXUS_HOME}/system/org/github/flytreeleft/nexus3-keycloak-plugin/${NEXUS_KEYCLOAK_PLUGIN_VERSION} \
   && cp nexus3-keycloak-plugin-${NEXUS_KEYCLOAK_PLUGIN_VERSION}.jar ${NEXUS_HOME}/system/org/github/flytreeleft/nexus3-keycloak-plugin/${NEXUS_KEYCLOAK_PLUGIN_VERSION}/.
-
 
 # Configure nexus
 RUN sed \
