@@ -18,11 +18,14 @@ ENV NEXUS_DATA /nexus-data
 ENV NEXUS_CONTEXT ''
 ENV SONATYPE_WORK ${SONATYPE_DIR}/sonatype-work
 
+ENV NEXUS_KEYCLOAK_PLUGIN_VERSION 0.3.4-SNAPSHOT
+ENV NEXUS_KEYCLOAK_PLUGIN_URL "https://github.com/flytreeleft/nexus3-keycloak-plugin/releases/download/0.3.4-pre2-SNAPSHOT/nexus3-keycloak-plugin-${NEXUS_KEYCLOAK_PLUGIN_VERSION}.jar"
+
 # Install prerequisites
-RUN apk add --no-cache --update bash ca-certificates runit su-exec util-linux openjdk8-jre
+RUN apk add --no-cache --update bash ca-certificates runit su-exec util-linux openjdk8-jre curl ruby
 
 # Install nexus
-RUN apk add --no-cache -t .build-deps curl wget gnupg openssl \
+RUN apk add --no-cache -t .build-deps wget gnupg openssl \
   && cd /tmp \
   && echo "===> Installing Nexus ${NEXUS_VERSION}..." \
   && wget -O nexus.tar.gz $NEXUS_TARBALL_URL; \
