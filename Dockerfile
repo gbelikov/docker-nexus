@@ -44,6 +44,13 @@ RUN apk add --no-cache -t .build-deps wget gnupg openssl \
   && rm -rf /tmp/* /var/cache/apk/* \
   && apk del --purge .build-deps
 
+# Install plugins
+RUN cd /tmp \
+  && wget https://github.com/flytreeleft/nexus3-keycloak-plugin/releases/download/0.3.4-pre2-SNAPSHOT/nexus3-keycloak-plugin-${NEXUS_KEYCLOAK_PLUGIN_VERSION}.jar \
+  && mkdir -p ${NEXUS_HOME}/system/org/github/flytreeleft/nexus3-keycloak-plugin/${NEXUS_KEYCLOAK_PLUGIN_VERSION} \
+  && cp nexus3-keycloak-plugin-${NEXUS_KEYCLOAK_PLUGIN_VERSION}.jar ${NEXUS_HOME}/system/org/github/flytreeleft/nexus3-keycloak-plugin/${NEXUS_KEYCLOAK_PLUGIN_VERSION}/.
+
+
 # Configure nexus
 RUN sed \
     -e '/^nexus-context/ s:$:${NEXUS_CONTEXT}:' \
